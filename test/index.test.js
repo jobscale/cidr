@@ -1,7 +1,5 @@
 const { Cidr } = require('..');
 
-const logger = console;
-
 describe('test cidr', () => {
   describe('success cidr', () => {
     it('toBe prompt', () => {
@@ -51,7 +49,15 @@ describe('test cidr', () => {
 
   describe('exception cidr', () => {
     it('toThrow prompt', () => {
-      expect(() => new Cidr('0.0.0.0/0').has('160.160.160')).toThrow("ipv4 required");
+      expect(() => new Cidr('0.0.0.0/0').has('160.160.160')).toThrow('ipv4 required');
+    });
+
+    it('toThrow prompt', () => {
+      expect(() => new Cidr('f.f.f.f').has('160.160.160.160')).toThrow('ipv4 required');
+    });
+
+    it('toThrow prompt', () => {
+      expect(() => new Cidr('0.0.0.256').has('160.160.160.160')).toThrow('ipv4 required');
     });
   });
 });
