@@ -1,0 +1,36 @@
+name: Node CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and test
+      run: |
+        cat /etc/*release
+        grep MH /proc/cpuinfo
+        free -h
+        dig jsx.jp
+        dig proxy.secure.jsx.jp
+        dig gcp.jsx.jp
+        dig aws.jsx.jp
+        npm i
+        npm run lint --if-present
+        docker run --rm -p 3128:3128 -d ghcr.io/jobscale/squid
+        echo $(https_proxy=http://127.0.0.1:3128 curl https://inet-ip.info/ip)
+        npm test
+        echo "CI = ${CI}"
+      env:
+        CI: true
