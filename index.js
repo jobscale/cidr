@@ -1,6 +1,10 @@
 class Cidr {
   constructor(cidr, trackBits) {
     if (!cidr) throw new Error('cidr required');
+    if (Array.isArray(cidr)) {
+      this.child = cidr.map(ip => new Cidr(ip));
+      return;
+    }
     this.family = cidr.split(':').length === 8 ? 6 : 4;
     this.size = this.family === 6 ? (trackBits || 64) : 32;
     const addrBits = cidr.split('/');
@@ -12,6 +16,9 @@ class Cidr {
   }
 
   has(ip) {
+    if (Array.isArray(this.child)) {
+      return !!this.child.find(cidr => cidr.has(ip));
+    }
     const bin = this[this.family === 6 ? 'ipv6ToBinary' : 'ipv4ToBinary'](ip);
     return bin >= this.min && bin <= this.max;
   }

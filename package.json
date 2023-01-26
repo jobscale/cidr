@@ -1,6 +1,6 @@
 {
   "name": "@jobscale/cidr",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "CIDR IP Address",
   "license": "MIT",
   "author": "jobscale <jobscale@users.noreply.github.com>",

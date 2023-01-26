@@ -45,6 +45,29 @@ describe('test cidr', () => {
     it('toBe prompt', () => {
       expect(new Cidr('160.160.160.161').has('160.160.160.160')).toBe(false);
     });
+
+    it('toBe prompt', () => {
+      expect(new Cidr([
+        '172.16.0.0/12',
+        '160.160.160.160/30',
+      ]).has('160.160.160.160')).toBe(true);
+    });
+
+    it('toBe prompt', () => {
+      expect(new Cidr([
+        '160.160.160.158',
+        '160.160.160.159',
+        '160.160.160.160',
+      ]).has('160.160.160.160')).toBe(true);
+    });
+
+    it('toBe prompt', () => {
+      expect(new Cidr([
+        '160.160.160.158',
+        '160.160.160.159',
+        '160.160.160.160',
+      ]).has('160.160.160.161')).toBe(false);
+    });
   });
 
   describe('exception cidr', () => {
