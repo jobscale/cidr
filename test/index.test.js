@@ -70,6 +70,12 @@ describe('test cidr', () => {
     });
   });
 
+  describe('exception ipv6 cidr', () => {
+    it('ipv6 toBe prompt', () => {
+      expect(new Cidr('::/0').has('2001:268:c28c:4658:2545:3a4f:d7b7:4203')).toBe(true);
+    });
+  });
+
   describe('exception cidr', () => {
     it('toThrow prompt', () => {
       expect(() => new Cidr('0.0.0.0/0').has('160.160.160')).toThrow('ipv4 required');

@@ -5,7 +5,7 @@ class Cidr {
       this.child = cidr.map(ip => new Cidr(ip));
       return;
     }
-    this.family = cidr.split(':').length === 8 ? 6 : 4;
+    this.family = cidr.split(':').length === 8 || cidr.match(/^::/) ? 6 : 4;
     this.size = this.family === 6 ? (trackBits || 64) : 32;
     const addrBits = cidr.split('/');
     this.mask = parseInt(addrBits[1], 10);
@@ -38,7 +38,7 @@ class Cidr {
 
   ipv6ToBinary(ip) {
     const address = ip.split(':');
-    if (address.length !== 6) throw new Error('ipv6 required');
+    if (address.length !== 8 && !ip.match(/^::/)) throw new Error('ipv6 required');
     let bin = '';
     for (let i of address) {
       if (i === '') i = '0';
