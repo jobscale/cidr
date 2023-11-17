@@ -27,7 +27,7 @@ new Cidr([
 
 ## Jest test
 ```
-git clone git@github.com:jobscale/cidr.git jobscale-cidr
+git clone https://github.com/jobscale/cidr.git jobscale-cidr
 cd $_
 npm test
 ```
