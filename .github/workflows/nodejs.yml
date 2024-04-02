@@ -1,6 +1,12 @@
-name: Node CI
+name: Nodejs CI
 
-on: [push, pull_request]
+on:
+  # schedule:
+  # - cron: '52 17 * * 1'
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -27,6 +33,7 @@ jobs:
         dig gcp.jsx.jp
         dig aws.jsx.jp
         npm i
+        npm run build --if-present
         npm run lint --if-present
         docker run --rm -p 3128:3128 -d ghcr.io/jobscale/squid
         echo $(https_proxy=http://127.0.0.1:3128 curl https://inet-ip.info/ip)
