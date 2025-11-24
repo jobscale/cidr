@@ -11,7 +11,8 @@ npm i @jobscale/cidr
 ### has
 
 ```javascript
-const { Cidr } = require('@jobscale/cidr');
+import { Cidr } from '@jobscale/cidr';
+// const { Cidr } = await import('@jobscale/cidr'); // CommonJs
 
 new Cidr('0.0.0.0/0').has('160.160.160.160')
 
