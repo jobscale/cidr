@@ -6,7 +6,7 @@ export class Cidr {
       return;
     }
     this.family = this.getFamily(cidr);
-    this.size = this.family === 6 ? (trackBits) : 32;
+    this.size = this.family === 6 ? trackBits : 32;
     const addrBits = cidr.split('/');
     this.mask = Number.parseInt(addrBits[1], 10);
     if (Number.isNaN(this.mask)) this.mask = this.family === 6 ? 64 : 32;
